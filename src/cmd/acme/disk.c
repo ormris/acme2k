@@ -18,11 +18,17 @@ int
 tempfile(void)
 {
 	char buf[128];
-	int i, fd;
+	int i, fd, loc;
 
-	snprint(buf, sizeof buf, "/tmp/X%d.%.4sacme", getpid(), getuser());
+	if (tmpdir==nil)
+		tmpdir = strdup("/tmp");
+
+	snprint(buf, sizeof buf, "%s/X%d.%.4sacme", tmpdir, getpid(), getuser());
+
+	loc = strlen(tmpdir) + 1;
+
 	for(i='A'; i<='Z'; i++){
-		buf[5] = i;
+		buf[loc] = i;
 		if(access(buf, AEXIST) == 0)
 			continue;
 		fd = create(buf, ORDWR|ORCLOSE|OCEXEC, 0600);

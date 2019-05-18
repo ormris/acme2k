@@ -543,6 +543,7 @@ int			fsyspid;
 char			*cputype;
 char			*objtype;
 char			*home;
+char		*tmpdir;
 char			*acmeshell;
 char			*fontnames[2];
 Image		*tagcols[NCOL];

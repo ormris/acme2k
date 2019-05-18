@@ -143,6 +143,7 @@ threadmain(int argc, char *argv[])
 	cputype = getenv("cputype");
 	objtype = getenv("objtype");
 	home = getenv("HOME");
+	tmpdir = getenv("TMPDIR");
 	acmeshell = getenv("acmeshell");
 	if(acmeshell && *acmeshell == '\0')
 		acmeshell = nil;
