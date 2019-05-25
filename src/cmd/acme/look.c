@@ -210,6 +210,8 @@ look3(Text *t, uint q0, uint q1, int external)
 		bufread(&t->file->b, e.q0, r, n);
 		if(search(ct, r, n) && e.jump)
 			moveto(mousectl, addpt(frptofchar(&ct->fr, ct->fr.p0), Pt(4, ct->fr.font->height-4)));
+		else
+			warning(nil, "text not found: %S\n", r);
 		if(t->w != ct->w)
 			winunlock(ct->w);
 		free(r);
