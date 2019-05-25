@@ -29,7 +29,7 @@ colinit(Column *c, Rectangle r)
 	Rectangle r1;
 	Text *t;
 
-	draw(screen, r, display->white, nil, ZP);
+	draw(screen, r, textcols[BACK], nil, ZP);
 	c->r = r;
 	c->w = nil;
 	c->nw = 0;
@@ -117,7 +117,7 @@ coladd(Column *c, Window *w, Window *clone, int y)
 		r1.max.y = min(y, v->body.fr.r.min.y+v->body.fr.nlines*v->body.fr.font->height);
 		r1.min.y = winresize(v, r1, FALSE, FALSE);
 		r1.max.y = r1.min.y+Border;
-		draw(screen, r1, display->black, nil, ZP);
+		draw(screen, r1, textcols[BACK], nil, ZP);
 		
 		/*
 		 * leave r with w's coordinates
@@ -181,7 +181,7 @@ colclose(Column *c, Window *w, int dofree)
 	memmove(c->w+i, c->w+i+1, (c->nw-i)*sizeof(Window*));
 	c->w = realloc(c->w, c->nw*sizeof(Window*));
 	if(c->nw == 0){
-		draw(screen, r, display->white, nil, ZP);
+		draw(screen, r, textcols[BACK], nil, ZP);
 		return;
 	}
 	up = 0;

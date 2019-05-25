@@ -73,7 +73,7 @@ rowadd(Row *row, Column *c, int x)
 		r = d->r;
 		if(Dx(r) < 100)
 			return nil;
-		draw(screen, r, display->white, nil, ZP);
+		draw(screen, r, textcols[BACK], nil, ZP);
 		r1 = r;
 		r1.max.x = min(x-Border, r.max.x-50);
 		if(Dx(r1) < 50)
@@ -191,7 +191,7 @@ rowdragcol(Row *row, Column *c, int _0)
 		p.x = c->r.max.x-80-Scrollwid;
 	r = d->r;
 	r.max.x = c->r.max.x;
-	draw(screen, r, display->white, nil, ZP);
+	draw(screen, r, textcols[BACK], nil, ZP);
 	r.max.x = p.x;
 	colresize(d, r);
 	r = c->r;
@@ -234,7 +234,7 @@ rowclose(Row *row, Column *c, int dofree)
 		c = row->col[i];
 		r.max.x = c->r.max.x;
 	}
-	draw(screen, r, display->white, nil, ZP);
+	draw(screen, r, textcols[BACK], nil, ZP);
 	colresize(c, r);
 }
 
@@ -584,7 +584,7 @@ rowload(Row *row, char *file, int initing)
 			r2.min.x = x;
 			if(Dx(r1) < 50 || Dx(r2) < 50)
 				continue;
-			draw(screen, Rpt(r1.min, r2.max), display->white, nil, ZP);
+			draw(screen, Rpt(r1.min, r2.max), textcols[BACK], nil, ZP);
 			colresize(c1, r1);
 			colresize(c2, r2);
 			r2.min.x = x-Border;
