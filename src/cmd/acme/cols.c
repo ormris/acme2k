@@ -117,7 +117,7 @@ coladd(Column *c, Window *w, Window *clone, int y)
 		r1.max.y = min(y, v->body.fr.r.min.y+v->body.fr.nlines*v->body.fr.font->height);
 		r1.min.y = winresize(v, r1, FALSE, FALSE);
 		r1.max.y = r1.min.y+Border;
-		draw(screen, r1, textcols[BACK], nil, ZP);
+		draw(screen, r1, display->black, nil, ZP);
 		
 		/*
 		 * leave r with w's coordinates
