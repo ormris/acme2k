@@ -63,8 +63,13 @@ threadmain(int argc, char *argv[])
 	rfork(RFENVG|RFNAMEG);
 
 	ncol = -1;
-
+	cputype = getenv("cputype");
+	objtype = getenv("objtype");
+	home = getenv("HOME");
+	tmpdir = getenv("TMPDIR");
+	acmeshell = getenv("acmeshell");
 	loadfile = nil;
+
 	ARGBEGIN{
 	case 'D':
 		{extern int _threaddebuglevel;
@@ -112,8 +117,10 @@ threadmain(int argc, char *argv[])
 		break;
 	case 'l':
 		loadfile = ARGF();
-		if(loadfile == nil)
-			goto Usage;
+		if (loadfile == nil) {
+			loadfile = emalloc(strlen(home)+10);
+			sprint(loadfile, "%s/acme.dump", home);
+		}
 		break;
 	case 'm':
 		mtpt = ARGF();
@@ -140,11 +147,6 @@ threadmain(int argc, char *argv[])
 	quotefmtinstall();
 	fmtinstall('t', timefmt);
 
-	cputype = getenv("cputype");
-	objtype = getenv("objtype");
-	home = getenv("HOME");
-	tmpdir = getenv("TMPDIR");
-	acmeshell = getenv("acmeshell");
 	if(acmeshell && *acmeshell == '\0')
 		acmeshell = nil;
 	p = getenv("tabstop");
